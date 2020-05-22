@@ -1,5 +1,12 @@
-# angular-8-registration-login-example
+# Test Tuten Angular
 
-Angular 8 User Registration and Login Example with Webpack 4
+Desarrollo del frontend solicitado con Angular 8 (No se empleo Angular.js por problemas con CORS)
 
-Full tutorial with example available at https://jasonwatmore.com/post/2019/06/10/angular-8-user-registration-and-login-example-tutorial
+# Instalación
+
+Clona el repositorio: git clone https://github.com/otonielmax/test_tuten_angular_frontend
+Instala las dependencias: npm install
+
+# Ejecución
+
+npm start
