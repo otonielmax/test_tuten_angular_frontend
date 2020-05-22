@@ -1,9 +1,52 @@
-﻿<h1>Hi {{currentUser.firstName}}!</h1>
-<p>You're logged in with Angular 8!!</p>
-<h3>All registered users:</h3>
-<ul>
-    <li *ngFor="let user of users">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-    </li>
-</ul>
+﻿<h1>Bienvenido {{currentUser.firstName}}!</h1>
+<p>Esta es tu area de trabajo</p>
+<h3>Todos tus Bookings:</h3>
+
+<div class="input-group input-group-sm mb-3">
+
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Ingresa aqui tu ID</span>
+    </div>
+        <input type="text" class="form-control" [(ngModel)]="filter" (input)="filterItem(filter)" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+</div>
+
+<div class="container border border-dark rounded">
+    <div class="row border border-dark">
+        <div class="col-sm">
+            BookingId 
+        </div>
+        <div class="col-sm">
+            Cliente
+        </div>
+        <div class="col-sm">
+            Fecha de Creación
+        </div>
+        <div class="col-sm">
+            Dirección
+        </div>
+        <div class="col-sm" (click)="sortPrice()">
+            Precio
+            <i class="fa fa-angle-up text-muted" *ngIf="!sortAsc"></i>
+            <i class="fa fa-angle-down text-muted" *ngIf="sortAsc"></i>
+        </div>
+    </div>
+    <div class="row border border-dark" *ngFor="let item of filterBookings">
+        <div class="col-sm">
+            {{item.bookingId}}
+        </div>
+        <div class="col-sm">
+            {{item.tutenUserClient.firstName}} {{item.tutenUserClient.lastName}}
+        </div>
+        <div class="col-sm">
+            {{ item.bookingTime | date:'dd/MM/yyyy' }}
+        </div>
+        <div class="col-sm">
+            {{item.locationId.streetAddress}}
+        </div>
+        <div class="col-sm">
+            {{item.bookingPrice}}
+        </div>
+      </div>
+  </div>

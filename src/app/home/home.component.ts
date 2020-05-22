@@ -7,7 +7,10 @@ import { UserService, AuthenticationService } from '@/_services';
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit {
     currentUser: User;
-    users = [];
+    bookings = [];
+    filterBookings = [];
+    filter: string;
+    sortAsc: boolean = false;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -17,18 +20,39 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loadAllUsers();
+        this.loadAllBookings();
     }
 
-    deleteUser(id: number) {
-        this.userService.delete(id)
+    private loadAllBookings() {
+        this.userService.getAll(this.currentUser.email, this.currentUser.sessionTokenBck)
             .pipe(first())
-            .subscribe(() => this.loadAllUsers());
+            .subscribe(data => 
+                {
+                    this.bookings = data;
+                    this.assignCopy();
+                });
     }
 
-    private loadAllUsers() {
-        this.userService.getAll()
-            .pipe(first())
-            .subscribe(users => this.users = users);
+    assignCopy(){
+        this.filterBookings = Object.assign([], this.bookings);
+    }
+
+    filterItem(value){
+        if(!value){
+            this.assignCopy();
+        } // when nothing has typed
+        this.filterBookings = Object.assign([], this.bookings).filter(
+           item => item.bookingId.toString().toLowerCase().indexOf(value.toLowerCase()) > -1
+        )
+    }
+
+    sortPrice() {
+        this.sortAsc = !this.sortAsc;
+        if (this.sortAsc) {
+            this.filterBookings.sort((a, b) => a.bookingPrice -  b.bookingPrice);
+        }
+        else {
+            this.filterBookings.sort((a, b) => b.bookingPrice - a.bookingPrice);
+        }
     }
 }

@@ -1,8 +1,30 @@
-﻿export class User {
+﻿import { UserRole } from './userRole';
+export class User {
     id: number;
     username: string;
     password: string;
     firstName: string;
     lastName: string;
-    token: string;
+    active: boolean;
+    agreedToTermsOfUse: boolean;
+    appVersion: string;
+    domain: string;
+    email: string;
+    estatus: string;
+    funds: number;
+    lastLogin: number;
+    passwordHash: string;
+    phoneNumber: string;
+    photoExt: string;
+    photoPath: string;
+    referrer: string;
+    rut: string;
+    serviceData: string;
+    sessionTokenBck: string;
+    sessionTokenCli: string;
+    sessionTokenPro: string;
+    sessionTokenWeb: string;
+    sync: number;
+    userId: string;
+    userRole: UserRole;
 }
